@@ -1,14 +1,16 @@
 require_relative '../config/environment'
 require_relative '../app/models/user.rb'
-
+$index_user = 1
+$index_todolist = 1
 # Use Active Record Model methods to implement the following methods.
 class Assignment
-
+ 
   #
   # Insert rows in DB
-  #
+  
   def create_user(user_hash = {}) #ta certo!!
-      obj = User.new(username: user_hash[:username], password_digest: user_hash[:password_digest])
+      obj = User.new(id: $index_user, username: user_hash[:username], password_digest: user_hash[:password_digest])
+      $index_user = $index_user+1
       obj.save
       #obj.create(username: user_hash[:username], password_digest: user_hash[:password_digest])
       obj.id
@@ -18,7 +20,11 @@ class Assignment
       # return an instance of the class with primary key (`id`), and dates (`created_at` and `updated_at`) assigned
   end
 
-  def create_todolist(params)
+  def create_todolist(todolist_hash = {})
+      obj = TodoList.new(id: $index_todolist, list_name: todolist_hash[:name], list_due_date: todolist_hash[:due_date])
+      $index_todolist = $index_todolist + 1
+      obj.save
+      obj.id
       # accept a hash of todolist properties (`:name` and `:due_date`) as an input parameter. Note these are not 100% the same as Model class.
       # use the TodoList Model class to create a new user in the DB
       # return an instance of the class with primary key (`id`), and dates (`created_at` and `updated_at`) assigned
