@@ -34,13 +34,15 @@ class Assignment
   # Retrieve paginated results from DB
   #
   def find_allusers(offset, limit)
+      obj = User.all.order(updated_at: :asc).limit(limit).offset(offset)
       # accept offset and limit input parameters
+
       # use the User Model class to find all Users, ordered by `updated_at` ascending, with specified row offset and row limit
       # return a collection of User instances that represent the specified rows
   end
 
   def find_alllists(offset, limit)
-      # accept offset and limit input parameters
+      obj = TodoList.all.order(list_due_date: :desc).limit(limit).offset(offset) # accept offset and limit input parameters
       # use the TodoList Model class to find all TodoLists, ordered by `list_due_date` descending, with specified row offset and row limit
       # return a collection of TodoList instances that represent the specified rows
   end
